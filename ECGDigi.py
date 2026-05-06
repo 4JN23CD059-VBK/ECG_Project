@@ -16,3 +16,8 @@ def process_my_ecg(image_path):
     #2. Zoom in/Pre-process (Adaptive thresholding handles uneven lighting)
     #This is great for phone photos with shadows!
     thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, CV2.THRESH_BINARY_INV, 11, 2)
+
+
+   #3. Clean up small noise (like paper texture)
+   kernel = np.ones((2,2), np.uint8)
+   clean = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, Kernel)
