@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from google.colab.patches import cv2_imshow # Special Colab function for images
 
-
+#Function to process the images
 def process_my_ecg(image_path):
     # 1. Load the image
     img = cv2.imread(image_path)
