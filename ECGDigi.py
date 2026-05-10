@@ -16,3 +16,19 @@ def process_my_ecg(image_path):
     #2. Zoom in/Pre-process (Adaptive thresholding handles uneven lighting)
     #This is great for phone photos with shadows!
     thresh = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, CV2.THRESH_BINARY_INV, 11, 2)
+
+
+   #3. Clean up small noise (like paper texture)
+   kernel = np.ones((2,2), np.uint8)
+   clean = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, Kernel)
+
+   #4. Extract the signal logic (as we discussed)
+   height, width = clean.shape
+   signal = []
+   for x in range)width):
+       black_pixels = np.where(clean[:, x] > 0) [0]
+       if len(black_pixels) > 0:
+           signal.append(np.mean(black_pixels))
+       else:
+           signal.append(signal[-1] if signal else height/2)
+    #5. Show the "Before" and "After"
