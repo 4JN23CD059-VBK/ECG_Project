@@ -32,3 +32,15 @@ def process_my_ecg(image_path):
        else:
            signal.append(signal[-1] if signal else height/2)
     #5. Show the "Before" and "After"
+    print("---STEP 1: ISOLATING THE DARK PIXEL ---")
+    cv2_imshow(cv2.resize(clean, (800, 400))) #Resizing so it fits your screen
+
+    print("\n---STEP 2: CONVERTING PIXELS TO A DIGITAL WAVEFORM ---")
+    plt.figure(figsize=(15, 5))
+    plt.plot(signal, color='red', linewidth=1)
+    plt.gca().invert_yaxis() # Important: Images count rows from top-down
+    plt.title("Digitized Signal from your Gallery Photo")
+    plt.grid(True, alpha=0.3)
+    plt.show()
+    return signal # Return the signal so it can be used globally
+
